@@ -1,11 +1,9 @@
-import { useState } from "react";
 import "./App.css";
-
+import { Product } from "./typescript/Product";
 import NavbarComponent from "./components/NavbarComponent";
 import CardComponent from "./components/CardComponent";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <div className="d-flex flex-column">
