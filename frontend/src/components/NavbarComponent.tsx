@@ -14,6 +14,7 @@ function NavbarComponent() {
           <Nav>
             <Nav.Link href="#3">Cart</Nav.Link>
             <Nav.Link href="#3">Sign In</Nav.Link>
+            <Nav.Link href="register">Register</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

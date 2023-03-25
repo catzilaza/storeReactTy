@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage";
 import ContactPage from "./pages/ContactPage";
 import ProductPage from "./pages/ProductPage";
+import RegisterPage from "./pages/RegisterPage";
 
 import axios from 'axios';
 
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "product/:productId",
     element: <ProductPage />,
+  },
+  {
+    path: "register",
+    element: <RegisterPage />,
   },
 ]);
 
