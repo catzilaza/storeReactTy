@@ -2,6 +2,7 @@ import { dataProducts } from "../data";
 import { Card, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface dessertData {
   dessert_name: string;
@@ -10,11 +11,10 @@ interface dessertData {
 }
 
 function CardComponent(): JSX.Element {
-  
-  const [data, setData] = useState<dessertData[]>([]);  
+  const [data, setData] = useState<dessertData[]>([]);
   const [error, setError] = useState<any>(null);
   //http://localhost:5000/api/desserts
-
+  //https://blue-jolly-snail.cyclic.app/api/desserts
   async function getAlldata() {
     await axios
       .get("https://blue-jolly-snail.cyclic.app/api/desserts")
@@ -30,16 +30,16 @@ function CardComponent(): JSX.Element {
     getAlldata();
   }, []);
 
-  // if (error ) return `Error: ${error}`;
-  // if (!data)
-  //   return (
-  //     <>
-  //       "Loading data!"
-  //       <div className="spinner-border text-primary" role="status">
-  //         <span className="visually-hidden">Loading...</span>
-  //       </div>
-  //     </>
-  //   );
+  //if (error ) return `Error: ${error}`;
+  if (!data)
+    return (
+      <>
+        "Loading data!"
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </>
+    );
 
   return (
     <>
@@ -60,11 +60,13 @@ function CardComponent(): JSX.Element {
               <Card.Body>
                 <Card.Title>{product.dessert_name}</Card.Title>
                 <Card.Text>ราคา {product.dessert_price} บาท</Card.Text>
-                <div className="d-grid">
-                  <Button href={`product/${id}`} variant="primary" size="lg">
-                    ซื้อ
-                  </Button>
-                </div>
+                <Link to={`product/${id}`}>
+                  <div className="d-grid">
+                    <Button variant="primary" size="lg">
+                      ซื้อ
+                    </Button>
+                  </div>
+                </Link>
               </Card.Body>
             </Card>
           </Col>
