@@ -8,6 +8,8 @@ import ErrorPage from "./pages/ErrorPage";
 import ContactPage from "./pages/ContactPage";
 import ProductPage from "./pages/ProductPage";
 import RegisterPage from "./pages/RegisterPage";
+import SignInPage from "./pages/SignInPage";
+import CartPage from "./pages/CartPage";
 
 import axios from 'axios';
 
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
   {
     path: "register",
     element: <RegisterPage />,
+  },
+  {
+    path: "signin",
+    element: <SignInPage />,
+  },
+  {
+    path: "cart",
+    element: <CartPage />,
   },
 ]);
 

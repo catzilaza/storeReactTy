@@ -19,7 +19,7 @@ function RegisterPage() {
           height: "50px",
           color: "#fff",
           fontSize: "30px",
-          margin: "40px auto",
+          margin: "10px auto",
           backgroundColor: "#373739",
         }}
       >
@@ -28,13 +28,16 @@ function RegisterPage() {
       <div
         style={{
           width: "600px",
-          margin: "20px auto",
+          margin: "10px auto",
           padding: "50px",
           backgroundColor: "#373739",
+          color: "#fff",
+          textAlign: "left",
         }}
       >
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Form.Group className="mb-3" controlId="formUser_name">
+            <Form.Label>User Name</Form.Label>
             <Form.Control
               placeholder="user_name"
               {...register("user_name", { required: true })}
@@ -45,6 +48,7 @@ function RegisterPage() {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formUser_firstname">
+            <Form.Label>User First Name</Form.Label>
             <Form.Control
               type="text"
               placeholder="user_firstname"
@@ -56,6 +60,7 @@ function RegisterPage() {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formUser_lastname">
+            <Form.Label>User Last Name</Form.Label>
             <Form.Control
               type="text"
               placeholder="user_lastname"
@@ -67,6 +72,7 @@ function RegisterPage() {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formUser_age">
+            <Form.Label>User Age</Form.Label>
             <Form.Control
               type="text"
               placeholder="user_age"
@@ -78,6 +84,7 @@ function RegisterPage() {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formUser_telephone">
+            <Form.Label>User Telephone</Form.Label>
             <Form.Control
               type="text"
               placeholder="user_telephone"
@@ -89,6 +96,7 @@ function RegisterPage() {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formUser_address">
+            <Form.Label>User Adderss</Form.Label>
             <Form.Control
               type="text"
               placeholder="user_address"
@@ -100,6 +108,7 @@ function RegisterPage() {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formUser_emai">
+            <Form.Label>User Email</Form.Label>
             <Form.Control
               type="email"
               placeholder="user_emai"
@@ -110,7 +119,8 @@ function RegisterPage() {
             )}
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formUser_password">
+          <Form.Group className="mb-5" controlId="formUser_password">
+            <Form.Label>User Password</Form.Label>
             <Form.Control
               type="password"
               placeholder="user_password"
@@ -120,10 +130,11 @@ function RegisterPage() {
               <p style={{ color: "red" }}>user_password is required.</p>
             )}
           </Form.Group>
-
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
+          <Form.Group className="d-grid">
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form.Group>
         </Form>
       </div>
     </>
