@@ -2,9 +2,10 @@ import "./App.css";
 import { Product } from "./typescript/Product";
 import NavbarComponent from "./components/NavbarComponent";
 import CardComponent from "./components/CardComponent";
+import axios from "axios";
+import React, { useState } from "react";
 
 function App() {
-
   return (
     <div className="d-flex flex-column">
       <header>

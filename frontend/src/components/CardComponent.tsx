@@ -9,11 +9,12 @@ interface dessertData {
   dessert_price: number;
 }
 
-function CardComponent() {
-  //const [data, setData] = useState<any>([]);
+function CardComponent(): JSX.Element {
+  
   const [data, setData] = useState<dessertData[]>([]);  
   const [error, setError] = useState<any>(null);
   //http://localhost:5000/api/desserts
+
   async function getAlldata() {
     await axios
       .get("https://blue-jolly-snail.cyclic.app/api/desserts")
@@ -29,21 +30,16 @@ function CardComponent() {
     getAlldata();
   }, []);
 
-  //console.log("Front : ", data)
-  // data.map((item)=>{
-  //   console.log("item : ", item.dessert_image)
-  // })
-
-  if (error) return `Error: ${error}`;
-  if (!data)
-    return (
-      <>
-        "Loading data!"
-        <div className="spinner-border text-primary" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </>
-    );
+  // if (error ) return `Error: ${error}`;
+  // if (!data)
+  //   return (
+  //     <>
+  //       "Loading data!"
+  //       <div className="spinner-border text-primary" role="status">
+  //         <span className="visually-hidden">Loading...</span>
+  //       </div>
+  //     </>
+  //   );
 
   return (
     <>
