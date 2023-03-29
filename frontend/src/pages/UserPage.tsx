@@ -17,7 +17,7 @@ function UserPage() {
 
   async function getAlldata() {
     await axios
-      .get("http://localhost:5000/api/user")
+      .get("https://blue-jolly-snail.cyclic.app/api/user")
       .then((response) => {
         setData(response.data);
       })
