@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
+
 
 function SignInPage() {
   const {
@@ -8,8 +10,17 @@ function SignInPage() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
     console.log(data);
+
+    await axios
+    .post("http://localhost:5000/api/user/", data)
+    .then((response) => {
+      console.log(" Ok! registerDataOne() ", response);
+    })
+    .catch((error) => {
+      console.log("Error! registerDataOne() ", error);        
+    });
   };
   return (
     <>

@@ -1,16 +1,36 @@
 import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
+
+interface userSchema {
+  user_name: string;
+  user_firstname: string;
+  user_lastname: string;    
+  user_email: string; 
+  user_address: string;
+  user_telephone: string;
+  user_password: string;
+}
 
 function RegisterPage() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<userSchema>();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data:userSchema) => {
+    console.log(data); 
+    await axios
+    .post("http://localhost:5000/api/user/", data)
+    .then((response) => {
+      console.log(" Ok! registerDataOne() ", response);
+    })
+    .catch((error) => {
+      console.log("Error! registerDataOne() ", error);        
+    });
   };
+
   return (
     <>
       <div
@@ -71,18 +91,6 @@ function RegisterPage() {
             )}
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formUser_age">
-            <Form.Label>User Age</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="user_age"
-              {...register("user_age", { required: true, pattern: /\d+/ })}
-            />
-            {errors.user_age && (
-              <p style={{ color: "red" }}>user_age is required.</p>
-            )}
-          </Form.Group>
-
           <Form.Group className="mb-3" controlId="formUser_telephone">
             <Form.Label>User Telephone</Form.Label>
             <Form.Control
@@ -107,15 +115,15 @@ function RegisterPage() {
             )}
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formUser_emai">
+          <Form.Group className="mb-3" controlId="formUser_email">
             <Form.Label>User Email</Form.Label>
             <Form.Control
               type="email"
-              placeholder="user_emai"
-              {...register("user_emai", { required: true })}
+              placeholder="user_email"
+              {...register("user_email", { required: true })}
             />
-            {errors.user_emai && (
-              <p style={{ color: "red" }}>user_emai is required.</p>
+            {errors.user_email && (
+              <p style={{ color: "red" }}>user_email is required.</p>
             )}
           </Form.Group>
 

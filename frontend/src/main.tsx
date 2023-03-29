@@ -10,6 +10,7 @@ import ProductPage from "./pages/ProductPage";
 import RegisterPage from "./pages/RegisterPage";
 import SignInPage from "./pages/SignInPage";
 import CartPage from "./pages/CartPage";
+import UserPage from "./pages/UserPage";
 
 import axios from 'axios';
 
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
   {
     path: "cart",
     element: <CartPage />,
+  },
+  {
+    path: "user",
+    element: <UserPage />,
   },
 ]);
 

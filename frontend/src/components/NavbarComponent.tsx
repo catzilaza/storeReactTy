@@ -17,6 +17,17 @@ function NavbarComponent() {
             Ts Shopping Online Brand link
           </Navbar.Brand>
           <Nav>
+          <Nav.Link
+              as={Link}
+              to="/user"
+              style={{
+                border: "1px solid white",
+                marginRight: "2px",
+                
+              }}
+            >
+              <Image src={cartIcon} alt="cartIcon"></Image><br/>User Manage
+            </Nav.Link>
             <Nav.Link
               as={Link}
               to="/cart"
