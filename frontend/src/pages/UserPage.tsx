@@ -14,15 +14,16 @@ interface userData {
 function UserPage() {
   const [data, setData] = useState<userData[]>([]);
   const [error, setError] = useState<any>(null);
-
+  //"https://stormy-teal-prawn.cyclic.app/api/user"
+  //http://localhost:5000/api/desserts
+  //,{headers: {'Authorization': localStorage.getItem('token')}}
   async function getAlldata() {
     await axios
-      .get("https://blue-jolly-snail.cyclic.app/api/user")
+      .get("https://stormy-teal-prawn.cyclic.app/api/user")
       .then((response) => {
         setData(response.data);
       })
-      .catch((error) => {
-        console.log("error", error);
+      .catch((error) => {        
         setError(error);
       });
   }
@@ -39,6 +40,7 @@ function UserPage() {
         </div>
       </>
     );
+
   return (
     <>
       <div
@@ -70,12 +72,12 @@ function UserPage() {
             {data.map((item, index) => (
               <tr key={index}>
                 <td>{index}</td>
-                <td>{item.user_name}</td>
                 <td>{item.user_firstname}</td>
                 <td>{item.user_lastname}</td>
+                <td>{item.user_name}</td>
                 <td>{item.user_email}</td>
                 <td>{item.user_level}</td>
-                <td>{item.user_timeStamp}</td>                
+                <td>{item.user_timeStamp}</td>
               </tr>
             ))}
           </tbody>
@@ -86,3 +88,31 @@ function UserPage() {
 }
 
 export default UserPage;
+
+/* 
+const username = ''
+const password = ''
+
+const token = Buffer.from(`${username}:${password}`, 'utf8').toString('base64')
+
+const url = 'https://...'
+const data = {
+  ...
+}
+
+axios.post(url, data, {
+  headers: {
+    'Authorization': `Basic ${token}`
+  },
+})
+
+const token = '..your token..'
+
+axios.post(url, {
+  //...data
+}, {
+  headers: {
+    'Authorization': `Basic ${token}` 
+  }
+})
+*/

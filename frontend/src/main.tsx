@@ -12,10 +12,12 @@ import SignInPage from "./pages/SignInPage";
 import CartPage from "./pages/CartPage";
 import UserPage from "./pages/UserPage";
 
-import axios from 'axios';
+import axios from "axios";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
-axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : '/'
-
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "development" ? "http://localhost:4000" : "/";
 
 const router = createBrowserRouter([
   {
@@ -25,9 +27,9 @@ const router = createBrowserRouter([
     children: [
       {
         path: "home",
-        element: <App />
+        element: <App />,
       },
-    ]
+    ],
   },
   {
     path: "contacts/:contactId",
@@ -57,6 +59,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );

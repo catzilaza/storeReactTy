@@ -14,10 +14,10 @@ function CardComponent(): JSX.Element {
   const [data, setData] = useState<dessertData[]>([]);
   const [error, setError] = useState<any>(null);
   //http://localhost:5000/api/desserts
-  //https://blue-jolly-snail.cyclic.app/api/desserts
-  async function getAlldata() {
+  //https://stormy-teal-prawn.cyclic.app/api/desserts
+  async function getAlldessertData() {
     await axios
-      .get("https://blue-jolly-snail.cyclic.app/api/desserts")
+      .get("https://stormy-teal-prawn.cyclic.app/api/desserts")
       .then((response) => {
         setData(response.data);
       })
@@ -27,10 +27,10 @@ function CardComponent(): JSX.Element {
       });
   }
   React.useEffect(() => {
-    getAlldata();
+    getAlldessertData();
   }, []);
 
-  //if (error ) return `Error: ${error}`;
+  //if (error) return `Error: ${error}`;
   if (!data)
     return (
       <>
@@ -40,6 +40,8 @@ function CardComponent(): JSX.Element {
         </div>
       </>
     );
+
+  //console.log("Card Component : ", data);
 
   return (
     <>
@@ -60,7 +62,7 @@ function CardComponent(): JSX.Element {
               <Card.Body>
                 <Card.Title>{product.dessert_name}</Card.Title>
                 <Card.Text>ราคา {product.dessert_price} บาท</Card.Text>
-                <Link to={`product/${id}`}>
+                <Link to={`product/${id}${product.dessert_name}`}>
                   <div className="d-grid">
                     <Button variant="primary" size="lg">
                       ซื้อ

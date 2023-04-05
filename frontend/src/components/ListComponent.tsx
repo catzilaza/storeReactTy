@@ -1,16 +1,15 @@
+
 import Table from "react-bootstrap/Table";
 import { useAppSelector } from "../store/store";
-import List from "../components/ListComponent";
 
-function CartPage() {
+const List = () => {
   const products = useAppSelector((state) => state.product.products);
 
-  console.log("CartPage() : ", products);
+  console.log("List = () : ", products)
 
   return (
     <>
-      <List />
-      {/* <div>
+      <div>
         <p>List Component</p>
         <Table striped bordered hover variant="dark">
           <thead>
@@ -25,7 +24,7 @@ function CartPage() {
           <tbody>
             {products.map((item, index) => (
               <tr key={index}>
-                <td>1</td>
+                <td>1</td>                
                 <td>---</td>
                 <td>{item.name}</td>
                 <td>---</td>
@@ -34,9 +33,9 @@ function CartPage() {
             ))}
           </tbody>
         </Table>
-      </div> */}
+      </div>
     </>
   );
-}
+};
 
-export default CartPage;
+export default List;

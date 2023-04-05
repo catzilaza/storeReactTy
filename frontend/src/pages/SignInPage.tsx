@@ -1,9 +1,15 @@
 import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
+import React, { useState } from "react";
 
-
+interface userData {
+  user_name: string;
+  user_token: string;
+}
 function SignInPage() {
+  const [dataResponse, setData] = useState<userData>();
+  const [error, setError] = useState<any>(null);
   const {
     register,
     handleSubmit,
@@ -14,14 +20,37 @@ function SignInPage() {
     console.log(data);
 
     await axios
-    .post("http://localhost:5000/api/user/", data)
-    .then((response) => {
-      console.log(" Ok! registerDataOne() ", response);
-    })
-    .catch((error) => {
-      console.log("Error! registerDataOne() ", error);        
-    });
+      .post("http://localhost:5000/api/user/signin", data)
+      .then((response) => {
+        console.log("Ok! SignInPage() ", response);
+        setData(response.data);
+      })
+      .catch((error) => {
+        console.log("Error! SignInPage() ", error);
+        setError(error);
+      });
   };
+
+  if (dataResponse) {
+    const username = dataResponse.user_name;
+    console.log(
+      "Frontend SignIn Page : name = ",
+      dataResponse?.user_name,
+      "token = ",
+      dataResponse?.user_token,
+      "dataResponse : ",
+      dataResponse
+    );
+    localStorage.setItem("token", dataResponse.user_token);    
+    alert(
+      `SingIn success : Welcom ${username} ${dataResponse} And Redirect to Home Page`
+    );
+    //window.location.href = "http://localhost:5173/";
+    //window.location.href = "https://ariya-dessert-online.netlify.app/";
+  }
+
+  //console.log("Frontend SignIn Page : ", data?.user_name,data?.user_token);
+
   return (
     <>
       <div
@@ -51,7 +80,7 @@ function SignInPage() {
             <Form.Label>User Name</Form.Label>
             <Form.Control
               placeholder="user_name"
-              {...register("user_name", { required: true })}
+              {...register("user_name", { required: true, maxLength: 15 })}
             />
             {errors.user_name && (
               <p style={{ color: "red" }}>name is required.</p>
@@ -63,7 +92,13 @@ function SignInPage() {
             <Form.Control
               type="email"
               placeholder="user_emai"
-              {...register("user_emai", { required: true })}
+              {...register("user_emai", {
+                required: true,
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: "invalid email address",
+                },
+              })}
             />
             {errors.user_emai && (
               <p style={{ color: "red" }}>user_emai is required.</p>
@@ -75,7 +110,11 @@ function SignInPage() {
             <Form.Control
               type="password"
               placeholder="user_password"
-              {...register("user_password", { required: true })}
+              {...register("user_password", {
+                required: true,
+                maxLength: 15,
+                minLength: 6,
+              })}
             />
             {errors.user_password && (
               <p style={{ color: "red" }}>user_password is required.</p>

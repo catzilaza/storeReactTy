@@ -2,6 +2,7 @@ import reactLogo from "../assets/react.svg";
 import viteLogo from "../assets/vite.svg";
 import cartIcon from "../assets/cartIcon.png";
 import keyIcon from "../assets/keyIcon.png";
+import customerIcon from "../assets/customerIcon.png"
 import registerIcon from "../assets/registerIcon.png";
 import { Navbar, Nav, Container, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -22,11 +23,10 @@ function NavbarComponent() {
               to="/user"
               style={{
                 border: "1px solid white",
-                marginRight: "2px",
-                
+                marginRight: "2px",                            
               }}
             >
-              <Image src={cartIcon} alt="cartIcon"></Image><br/>User Manage
+              <Image src={customerIcon} alt="cartIcon" style={{height:"64px"}}></Image><br/>User Manage
             </Nav.Link>
             <Nav.Link
               as={Link}
