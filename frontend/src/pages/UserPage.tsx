@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
-
+import { useAppSelector, useAppDispatch } from "../store/store";
 interface userData {
   user_name: string;
   user_firstname: string;
@@ -12,18 +12,19 @@ interface userData {
 }
 
 function UserPage() {
-  const [data, setData] = useState<userData[]>([]);
+  const userlogin = useAppSelector((state) => state.user.users);
+  const [dataUser, setDataUser] = useState<userData[]>([]);
   const [error, setError] = useState<any>(null);
-  //"https://stormy-teal-prawn.cyclic.app/api/user"
+  //https://crabby-teal-seal.cyclic.app/user"
   //http://localhost:5000/api/desserts
   //,{headers: {'Authorization': localStorage.getItem('token')}}
   async function getAlldata() {
     await axios
-      .get("https://stormy-teal-prawn.cyclic.app/api/user")
+      .get("https://crabby-teal-seal.cyclic.app/user")
       .then((response) => {
-        setData(response.data);
+        setDataUser(response.data);
       })
-      .catch((error) => {        
+      .catch((error) => {
         setError(error);
       });
   }
@@ -31,15 +32,17 @@ function UserPage() {
     getAlldata();
   }, []);
 
-  if (!data)
+  if (!dataUser)
     return (
       <>
-        "Loading data!"
+        "Loading User!"
         <div className="spinner-border text-primary" role="status">
           <span className="visually-hidden">Loading...</span>
         </div>
       </>
     );
+
+    console.log("UserPage(): ", userlogin)
 
   return (
     <>
@@ -69,7 +72,7 @@ function UserPage() {
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => (
+            {dataUser.map((item, index) => (
               <tr key={index}>
                 <td>{index}</td>
                 <td>{item.user_firstname}</td>

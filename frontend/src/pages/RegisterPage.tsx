@@ -32,7 +32,7 @@ function RegisterPage() {
   const onSubmit = async (data: userSchema) => {
     console.log(data);
     await axios
-      .post("http://localhost:5000/api/user", data)
+      .post("https://crabby-teal-seal.cyclic.app/user", data)
       .then((response) => {
         console.log("Response! Register Page() ", response);
         setDataResponse(response.data);

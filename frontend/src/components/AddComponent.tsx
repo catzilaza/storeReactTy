@@ -3,7 +3,7 @@ import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 import { useAppDispatch } from "../store/store";
-import { addProduct } from "../store/dessertFeature/productSlice";
+import { addProductToCart } from "../store/feature/dessert/dessertSlice";
 
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -29,7 +29,7 @@ const Add = (props: any) => {
     console.log(data);
 
     dispatch(
-      addProduct({ name: props.productName, quantity: data.productQuantity })
+      addProductToCart({ name: props.productName, quantity: data.productQuantity, price:(59 * data.productQuantity), image:"" })
     );
   };
 

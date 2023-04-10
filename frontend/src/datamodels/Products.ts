@@ -1,4 +1,4 @@
-export type Product = {
+export type DessertProduct = {
     name: string
     slug: string
     image: string

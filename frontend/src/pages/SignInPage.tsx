@@ -3,13 +3,30 @@ import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 import React, { useState } from "react";
 
-interface userData {
+import { useAppSelector, useAppDispatch } from "../store/store";
+import { loginUser } from "../store/userFeature/userSlice";
+
+export interface User {
+  _id: string;
   user_name: string;
+  user_firstname: string;
+  user_lastname: string;
+  user_telephone: string;
+  user_address: string;
+  user_email: string;
+  user_password: string;
   user_token: string;
+  user_level: string;
 }
+
 function SignInPage() {
-  const [dataResponse, setData] = useState<userData>();
+  const [dataResponse, setResData] = useState<User>();
   const [error, setError] = useState<any>(null);
+
+  const user = useAppSelector((state) => state.user.users);
+  const dispatch = useAppDispatch();
+  //const userStore: User[] = [];
+
   const {
     register,
     handleSubmit,
@@ -20,10 +37,11 @@ function SignInPage() {
     console.log(data);
 
     await axios
-      .post("http://localhost:5000/api/user/signin", data)
+      .post("http://localhost:5000/user/signin", data)
       .then((response) => {
         console.log("Ok! SignInPage() ", response);
-        setData(response.data);
+        setResData(response.data);
+        dispatch(loginUser(response.data));
       })
       .catch((error) => {
         console.log("Error! SignInPage() ", error);
@@ -31,20 +49,9 @@ function SignInPage() {
       });
   };
 
-  if (dataResponse) {
-    const username = dataResponse.user_name;
-    console.log(
-      "Frontend SignIn Page : name = ",
-      dataResponse?.user_name,
-      "token = ",
-      dataResponse?.user_token,
-      "dataResponse : ",
-      dataResponse
-    );
-    localStorage.setItem("token", dataResponse.user_token);    
-    alert(
-      `SingIn success : Welcom ${username} ${dataResponse} And Redirect to Home Page`
-    );
+  if (dataResponse) {    
+    localStorage.setItem("token", dataResponse.user_token);
+    alert(`SingIn success : Welcom  ${dataResponse.user_name}  And Redirect to Home Page`);
     //window.location.href = "http://localhost:5173/";
     //window.location.href = "https://ariya-dessert-online.netlify.app/";
   }
